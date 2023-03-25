@@ -1,0 +1,42 @@
+
+/* nuevo -- */
+body{
+    font-size: 17px;
+    font-family: 'Mulish', sans-serif;
+    ;
+}
+/* nuevo -- */
+
+.cajamostrar{
+    padding-top: 30px;
+}
+
+.titulopagina{
+    font-size: 42px;
+    color: #36a367;
+    font-weight: 800;
+}
+
+.custom-navbar{
+    background-color: rgb(66, 136, 77);
+}
+
+.navbar-nav .nav-link{
+    color: rgb(255, 255, 255);
+    margin: 0px 5px;
+    font-size: 1.2rem;
+}
+
+#btnhabilitar{
+    background-color: #2f6081;
+    ;
+}
+
+#btnhabilitar:hover{
+    background-color: #264c66;
+    transition: 0.2s;
+}
+
+.navbar-nav .nav-link:hover{
+    color: rgb(121, 238, 150);
+}
