@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package pe.com.apiciberelectrik.restController;
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,46 +15,44 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pe.com.apiciberelectrik.entity.gestion.ProductoEntity;
-import pe.com.apiciberelectrik.service.gestion.ProductoService;
+import pe.com.apiciberelectrik.entity.gestion.ProveedorEntity;
+import pe.com.apiciberelectrik.service.gestion.ProveedorService;
 
-
+/**
+ *
+ * @author user
+ */
 @RestController
-@RequestMapping("/producto")
-public class ProductoRestController {
-    
-    @Autowired
-    private ProductoService servicioproducto;
-    
-    @Autowired
-    private ProductoService servicio;
+@RequestMapping("/proveedor")
+public class ProveedorRestController {
+     @Autowired
+    private ProveedorService servicio;
     
     @GetMapping
-    public List<ProductoEntity> findAll(){
+    public List<ProveedorEntity> findAll(){
         return servicio.findAll();
     }
     @GetMapping("/custom")
-    public List<ProductoEntity>findAllCustom(){
+    public List<ProveedorEntity>findAllCustom(){
         return servicio.findAllCustom();
     }
     @PostMapping
-    public ProductoEntity add(@RequestBody ProductoEntity p){
+    public ProveedorEntity add(@RequestBody ProveedorEntity p){
         return servicio.add(p);
     }
     @GetMapping("/{id}")
-    public Optional<ProductoEntity>findById(@PathVariable long id){
+    public Optional<ProveedorEntity>findById(@PathVariable long id){
         return servicio.findById(id);
     }
     @PutMapping("/{id}")
-    public ProductoEntity update(@PathVariable long id,@RequestBody ProductoEntity p){
+    public ProveedorEntity update(@PathVariable long id,@RequestBody ProveedorEntity p){
         p.getCodigo();
         return servicio.update(p);
     }
     @DeleteMapping("/{id}")
-    public ProductoEntity delete(@PathVariable long id){
-        ProductoEntity objProducto = new ProductoEntity();
-        objProducto.setCodigo(id);
-        return servicio.delete(ProductoEntity.builder().codigo(id).build());
+    public ProveedorEntity delete(@PathVariable long id){
+        ProveedorEntity objProveedor = new ProveedorEntity();
+        objProveedor.setCodigo(id);
+        return servicio.delete(ProveedorEntity.builder().codigo(id).build());
     }
-    
 }

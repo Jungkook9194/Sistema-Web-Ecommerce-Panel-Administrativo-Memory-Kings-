@@ -38,6 +38,7 @@ import pe.com.apiciberelectrik.entity.gestion.CategoriaEntity;
 import pe.com.apiciberelectrik.entity.gestion.ClienteEntity;
 import pe.com.apiciberelectrik.entity.gestion.DetalleVentaEntity;
 import pe.com.apiciberelectrik.entity.gestion.ProductoEntity;
+import pe.com.apiciberelectrik.entity.gestion.ProveedorEntity;
 import pe.com.apiciberelectrik.entity.gestion.ReclamoEntity;
 import pe.com.apiciberelectrik.entity.gestion.RolEntity;
 import pe.com.apiciberelectrik.entity.gestion.UsuarioEntity;
@@ -50,6 +51,7 @@ import pe.com.apiciberelectrik.service.gestion.CategoriaService;
 import pe.com.apiciberelectrik.service.gestion.ClienteService;
 import pe.com.apiciberelectrik.service.gestion.DetalleVentaService;
 import pe.com.apiciberelectrik.service.gestion.ProductoService;
+import pe.com.apiciberelectrik.service.gestion.ProveedorService;
 import pe.com.apiciberelectrik.service.gestion.ReclamoService;
 import pe.com.apiciberelectrik.service.gestion.RolService;
 import pe.com.apiciberelectrik.service.gestion.UsuarioService;
@@ -59,7 +61,7 @@ import pe.com.apiciberelectrik.service.gestion.VentaService;
 public class Routes {
 
     private static final int MAX_PRODUCTOS_EN_CARRITO = 1;
-    
+
     @Autowired
     private EntityManager entityMaganer;
 
@@ -77,6 +79,9 @@ public class Routes {
 
     @Autowired
     private DataSource dataSource;
+
+    @Autowired
+    private ProveedorService servicioproveedor;
 
     @Autowired
     private RolService serviciorol;
@@ -126,6 +131,12 @@ public class Routes {
     public String MostrarRol(Model modelo) {
         modelo.addAttribute("rol", serviciorol.findAllCustom());
         return "/rol/mostrarrol";
+    }
+
+    @GetMapping("/mostrarproveedor")
+    public String MostrarProveedor(Model modelo) {
+        modelo.addAttribute("proveedor", servicioproveedor.findAllCustom());
+        return "/proveedor/mostrarproveedor";
     }
 
     @GetMapping("/mostrarcliente")
@@ -192,7 +203,7 @@ public class Routes {
             if (!itemFound) {
                 Carrito.add(producto);
                 return "redirect:/mostrarproducto?agregado";
-            } 
+            }
         }
         return "redirect:/mostrarproducto?noagregado";
     }
@@ -251,7 +262,7 @@ public class Routes {
     }
 
     @GetMapping("/mostrardetalle")
-    public String MostrarDetalleVenta( Model modelo) {
+    public String MostrarDetalleVenta(Model modelo) {
         modelo.addAttribute("detalle", serviciodetalle.findAllCustom());
         modelo.addAttribute("producto", servicioproducto.findAllCustom());
         modelo.addAttribute("carrito", Carrito);
@@ -324,6 +335,12 @@ public class Routes {
         return "/usuario/registrarusuario";
     }
 
+    @GetMapping("/mostrarresgistrarproveedor")
+    public String MostrarRegistrarProveedor(Model modelo) {
+        modelo.addAttribute("producto", servicioproducto.findAllCustom());
+        return "/proveedor/registrarproveedor";
+    }
+
     @GetMapping("/mostrarresgistrarventa")
     public String MostrarRegistrarVenta(Model modelo) {
         modelo.addAttribute("rol", serviciorol.findAllCustom());
@@ -362,6 +379,11 @@ public class Routes {
     @ModelAttribute("reclamo")
     public ReclamoEntity ModeloReclamo() {
         return new ReclamoEntity();
+    }
+
+    @ModelAttribute("proveedor")
+    public ProveedorEntity ModeloProveedor() {
+        return new ProveedorEntity();
     }
 
     @ModelAttribute("cliente")
@@ -482,6 +504,22 @@ public class Routes {
             return "redirect:/mostrarrol?correcto";
         } catch (Exception e) {
             return "redirect:/mostrarrol?incorrecto";
+        }
+    }
+
+    @PostMapping("/registrarproveedor")
+    @Transactional
+    public String RegistroProveedor(@Valid @ModelAttribute("proveedor") ProveedorEntity p, BindingResult result, ProductoEntity pro) {
+        try {
+            if (result.hasErrors()) {
+                return "proveedor/registrarproveedor";
+            }
+            servicioproveedor.add(p);
+            ProductoEntity produ = entityMaganer.find(ProductoEntity.class, p.getProducto().getCodigo());
+            produ.setStock(produ.getStock() + p.getCantidad());
+            return "redirect:/mostrarproveedor?correcto";
+        } catch (Exception e) {
+            return "redirect:/mostrarproveedor?incorrecto";
         }
     }
 

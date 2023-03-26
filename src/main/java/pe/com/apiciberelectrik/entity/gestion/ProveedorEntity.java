@@ -12,13 +12,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -30,26 +31,32 @@ import pe.com.apiciberelectrik.entity.base.BaseEntity;
  *
  * @author user
  */
+
 @SuperBuilder 
 @NoArgsConstructor 
 @AllArgsConstructor 
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Entity(name="ReclamoEntity") 
-@Table(name="reclamo") 
-public class ReclamoEntity extends BaseEntity implements  Serializable {
+@Entity(name="ProveedorEntity") 
+@Table(name="proveedor") 
+public class ProveedorEntity extends BaseEntity implements  Serializable {
     private static final long serialVersionUID=1L;
     @Id 
-    @Column(name="codigo")
+    @Column(name="codprov")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long codigo;
-    @Column(name="descripcion", length = 200, nullable = false)
-    @Size(min=10,max=200,message = "La descripción debe de tener como minimo {min} y maximo {max} caracteres.")
-    private String descripcion;
-    @NotNull(message = "Debe seleccionar un cliente.")
+    @Column(name="nomprov",length = 200, nullable = false)
+    private String nombre;
+    @Column(name="pais",nullable = false)
+    private String pais;
+    @Column(name="telefono",nullable = false)
+    private int telefono;
+    @Column(name = "cantprov")
+    private int cantidad;
     @ManyToOne //relacion de uno a muchos
-    @JoinColumn(name="codcli",nullable = false)
-    private ClienteEntity cliente;
-    @Column(name="fechareclamo",nullable = false)
-    private LocalDate fechareclamacion = LocalDate.now();
+    @JoinColumn(name="codpro",nullable = false)
+    private ProductoEntity producto;
+    @Column(name="fechaentrada",nullable = false)
+    private LocalDate fechaentrada = LocalDate.now();
+    
 }

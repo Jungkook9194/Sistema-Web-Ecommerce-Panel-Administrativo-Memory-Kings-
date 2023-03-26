@@ -39,6 +39,9 @@
                             <a class="nav-link" th:href="@{/mostrarusuario}">Usuarios</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" th:href="@{/mostrarproveedor}">Proveedor</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" th:href="@{/mostrarreclamo}">Reclamos</a>
                         </li>
                         <form th:action="@{/logout}" method="post">
@@ -50,21 +53,6 @@
                     </ul>
                 </div>
             </nav>
-            <!-- <div class="vh-100 d-flex align-items-center position-fixed start-0 top-0" role="navigation">
-                <div class="p-2">
-                    <div id="mainNav">
-                        <ul class="list-unstyled rounded ms-2">
-                            <li><a class="vlink rounded border-0" th:href="@{/principal}"><i class="fas fa-home"></i> <span>Home</span></a></li>
-                            <li><a class="vlink rounded" th:href="@{/mostrarcategoria}"><i class="fa-solid fa-boxes-stacked"></i><span>Categoria</span></a></li>
-                            <li><a class="vlink rounded" th:href="@{/mostrarproducto}"><i class="fa-solid fa-cart-shopping"></i><span>Productos</span></a></li>
-                            <li><a class="vlink rounded" th:href="@{/mostrarrol}"><i class="fa-solid fa-users"></i></i><span>Roles</span></a></li>
-                            <li><a class="vlink rounded" th:href="@{/mostrarcliente}"><i class="fa-solid fa-user"></i><span>Cliente</span></a></li>
-                            <li><a class="vlink rounded" th:href="@{/mostrarusuario}"><i class="fa-solid fa-user-tie"></i><span>Usuario</span></a></li>
-                            <li><a class="vlink rounded" th:href="@{/mostrarreclamo}"><i class="fa-solid fa-book-open"></i><span>Reclamaciones</span></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>-->
         </div>
         <footer th:fragment="footer">
             <div class="container my-5">

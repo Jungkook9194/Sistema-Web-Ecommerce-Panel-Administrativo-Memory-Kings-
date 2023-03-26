@@ -42,10 +42,7 @@ public class ProductoEntity extends BaseEntity implements  Serializable{
     @DecimalMax("999999.99")
     private double precio;
     @Column(name="stopro",nullable = false)
-    @Positive(message = "La cantidad debe de ser mayor o igual a cero.")//permite valores positivos o cero
-    @NotNull(message="Debe de ingresar el stock")
-    @Max(value = 999, message = "El valor no puede ser mayor a 999")
-    private int stock;
+    private int stock = 0;
     @NotNull(message = "Debe seleccionar una categoría.")
     @ManyToOne //relacion de uno a muchos
     @JoinColumn(name="codcat",nullable = false)

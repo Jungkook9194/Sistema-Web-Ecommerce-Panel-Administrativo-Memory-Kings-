@@ -72,11 +72,6 @@
                 <div class="text-danger" th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}" style="margin-top: 10px;"></div>
             </div>
             <div class="col-6" style="margin-top: 15px">
-                <label for="txtPreV" class="form-label">Stock</label>
-                <input type="text" class="form-control" id="txtPreV" th:field="*{stock}" placeholder="Ingrese Stock" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" maxlength="3">
-                <div class="text-danger" th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}" style="margin-top: 10px;"></div>
-            </div>
-            <div class="col-6" style="margin-top: 15px">
                 <label for="cboCategoria" class="form-label">Categoria:</label>
                 <select id="cboCategoria" class="form-select" th:field="*{categoria}">
                     <option value="">Seleccione una categoria</option>
